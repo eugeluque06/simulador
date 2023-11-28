@@ -4,25 +4,22 @@ from Entrada_salida import Entrada_salida
 from Proceso import Proceso
 
 
-def  ingresar_procesos(lista_procesos,Prioridad):
-    seguir = True
-    while (seguir): 
-        nombre = input("ingrese por favor el nombre del proceso: ")
-        tiempo_ingreso = int(input("ingrese por favor el tiempo de ingreso: "))
-        tiempo_ejecucion = int(input("ingrese por favor el tiempo de ejecucion del proceso: "))
-        cantidad_rafagas = int(input("ingrese por favor la cantidad rafagas: "))
-        tiempo_E_S = int(input("ingrese por favor el tiempo de entrada/salida: "))
-        cantidad_rafagas_E_S = int(input("ingrese por favor la cantidad de entrada salidas que tendra: "))
-        prioridad = 0
-        if (Prioridad == True ): 
-            prioridad = int(input("ingrese por favor la prioridad que tendra: "))
-        proceso = Proceso( nombre, tiempo_ejecucion, tiempo_ingreso, tiempo_E_S, cantidad_rafagas, cantidad_rafagas_E_S,0, prioridad)
-        lista_procesos.append(proceso) 
-        respuesta = input("desea seguir agregando procesos?")
-        if (respuesta == "no"): 
-            seguir = False
-        else: 
-            seguir = True
+def  ingresar_procesos(contenido):
+    contenido_aux = contenido.split("\n")
+    lista_procesos = []
+    for linea in contenido_aux:
+        atributos_proceso = linea.split(',')
+        # print(atributos_proceso)           
+        nombre = atributos_proceso[0].strip()
+        tiempo_ejecucion = int(atributos_proceso[1].strip())
+        tiempo_ingreso = int(atributos_proceso[2].strip())
+        tiempo_e_s = int(atributos_proceso[3].strip())
+        cantidad_rafagas = int(atributos_proceso[4].strip())
+        cantidad_rafagas_e_s = int(atributos_proceso[5].strip())
+        tiempo_ejecutado = int(atributos_proceso[6].strip())
+        prioridad = int(atributos_proceso[7].strip())
+        proceso = Proceso(nombre,tiempo_ejecucion,tiempo_ingreso,tiempo_e_s,cantidad_rafagas,cantidad_rafagas_e_s,tiempo_ejecutado,prioridad)
+        lista_procesos.append(proceso)
     return (lista_procesos)
 
 class main(): 
@@ -46,8 +43,19 @@ class main():
     lista = []
     while (Aceptar_procesos > 0): 
         Aceptar_procesos -= 1
-    print(f'prioridad {prioridad}')
-    lista = ingresar_procesos(lista,prioridad)
+    
+    Archivo = input("Ingresa el nombre del archivo: ")
+    contenido = ""
+    try:
+        with open(Archivo, "r") as archivo:
+            contenido = archivo.read()
+
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo '{Archivo}'.")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+
+    lista = ingresar_procesos(contenido)
     controlador = Controlador()
     procesador = Procesador("")
     entrada_salida = Entrada_salida("")
