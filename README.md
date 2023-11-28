@@ -1,3 +1,3 @@
 el simulador recibe un archivo con los datos ordenador por tuplas, en el orden: (nombre,tiempo_ejecucion,tiempo_ingreso,tiempo_e_s,cantidad_rafagas,cantidad_rafagas_e_s,tiempo_ejecutado,prioridad) para despues poder crear los procesos e ir encolandolos, hay un ejemplo en repositorio de como seria con una tanda de procesos. 
-las politicas que recibe son:  'FCFS','RR','SRT','SJF''PRIORIDAD', escritas en mayusculas, despues procede a ejecutar los procesos
+las politicas que recibe son:  'FCFS','RR','SRT','SJF','PRIORIDAD', escritas en mayusculas, despues procede a ejecutar los procesos
 a los procesos no los puede ejecutar las entradas salidas a la vez por lo que comienza a ejecutar un proceso y hasta que no termine de ejecutar su entrada salida no termina, excepto en el caso de las preemtivas que si necesita cambiar de proceso en el momento de la ejecucion lo hace, funciona de una menera como monoprocesador
